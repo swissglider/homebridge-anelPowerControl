@@ -1,0 +1,28 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "071-25-134"
+    },
+
+    "accessories": [],
+
+    "platforms": [{
+        "platform": "anelPowerControl",
+        "powerStatusUpdatefromServerIn_s": "10",
+        "powerSockets": [{
+            "socketName": "PowerSocket_ADV",
+            "socketTyp": "NetPwrCtrlADV",
+            "socketIP": "192.168.30.21",
+            "socketUsername": "user7",
+            "socketPassword": "anel"
+        }, {
+            "socketName": "PowerSocket_Home",
+            "socketTyp": "NetPwrCtrlHome",
+            "socketIP": "192.168.30.20",
+            "socketUsername": "user7",
+            "socketPassword": "anel"
+        }]
+    }]
+}
