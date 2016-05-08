@@ -13,7 +13,6 @@ module.exports = function(homebridge) {
 }
 
 function AnelPowerControl(log, config, api) {
-
     this.log = log;
     this.switchNames = [];
     this.config = config || {
