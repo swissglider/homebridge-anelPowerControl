@@ -25,13 +25,13 @@ Edit your config.json accordingly. Configuration sample:
         "powerSockets": [{
             "socketName": "PowerSocket_ADV",
             "socketTyp": "NetPwrCtrlADV",
-            "socketIP": "192.168.30.21",
+            "socketIP": "192.168.3.10",
             "socketUsername": "user7",
             "socketPassword": "anel"
         }, {
             "socketName": "PowerSocket_Home",
             "socketTyp": "NetPwrCtrlHome",
-            "socketIP": "192.168.30.20",
+            "socketIP": "192.168.3.11",
             "socketUsername": "user7",
             "socketPassword": "anel"
         }]
