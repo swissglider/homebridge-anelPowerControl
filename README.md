@@ -1,5 +1,4 @@
-# homebridge-anelPowerControl [![npm version](https://www.npmjs.com/package/homebridge-anelPowerControl.svg)](https://www.npmjs.com/package/homebridge-anelPowerControl)
-Anel powercontrol Plugin for [HomeBridge](https://github.com/nfarina/homebridge)
+# homebridge-anelPowerControl
 
 ## What this plugin does
 This plugin allows you to controll the Anel Power Control Panels via HomeKit. This means you can controll all the Power Sockets just by telling Siri to do so.
