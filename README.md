@@ -1,4 +1,4 @@
-# homebridge-anelPowerControl
+# homebridge-anelPowerControl [![npm version](https://www.npmjs.com/package/homebridge-anelPowerControl.svg)](https://www.npmjs.com/package/homebridge-anelPowerControl)
 Anel powercontrol Plugin for [HomeBridge](https://github.com/nfarina/homebridge)
 
 ## What this plugin does
