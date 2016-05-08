@@ -1,6 +1,6 @@
 {
   "name": "homebridge-anelPowerControl",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Anel powercontrl plugin for homebridge",
   "repository": {
     "type": "git",
