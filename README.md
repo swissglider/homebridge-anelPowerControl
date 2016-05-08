@@ -36,5 +36,5 @@ Edit your config.json accordingly. Configuration sample:
         }]
     }]
 
->This is not an official Anel Plugin, it is created by me myself !
- ANEL - Website http://anel-elektronik.de/
+>This is not an official Anel Plugin, it is created by myself !
+>ANEL - Website http://anel-elektronik.de/
