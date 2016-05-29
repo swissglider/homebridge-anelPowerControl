@@ -49,7 +49,7 @@ AnelPowerControl.prototype.didFinishLaunching = function() {
     }
 
     // wait 5 second and then start to update Status
-    setTimeout(AnelPowerControl.prototype.updateSocketStatus.bind(this),10000);
+    setTimeout(AnelPowerControl.prototype.updateSocketStatus.bind(this), 10000);
 }
 
 // Method to add and update HomeKit accessories
@@ -213,18 +213,38 @@ AnelPowerControl.prototype.getCurrentSocketStatus = function(powerSocketConfig, 
                     this.log(name + "Failed to call read the configuration from Socket = " + powerSocketConfig.socketName);
                     this.log(name + "Returned Body = " + body);
                 }
-                for (i=0; i < 3; i++) {
+                for (i = 0; i < 3; i++) {
                     var switchS = {
                         'socketName': powerSocketConfig.socketName,
                         'socketTyp': powerSocketConfig.socketTyp,
                         'socketIP': powerSocketConfig.socketIP,
                         'socketUsername': powerSocketConfig.socketUsername,
                         'socketPassword': powerSocketConfig.socketPassword,
-                        'switchName': resultList[(i+nameIndex)],
+                        'switchName': resultList[(i + nameIndex)],
                         'switchStatus': resultList[(i + nameIndex + 10)] == '1' ? true : false,
                         'switchNumber': i
                     };
                     toCallAfterRequest(switchS);
+                } else if (powerSocketConfig.socketTyp == "NetPwrCtrlPro") {
+                    var resultList = body.split(';');
+                    var nameIndex = 10
+                    if (resultList[0] != 'NET-PWRCTRL_04.0') {
+                        this.log(name + "Failed to call read the configuration from Socket = " + powerSocketConfig.socketName);
+                        this.log(name + "Returned Body = " + body);
+                    }
+                    for (i = 0; i < 8; i++) {
+                        var switchS = {
+                            'socketName': powerSocketConfig.socketName,
+                            'socketTyp': powerSocketConfig.socketTyp,
+                            'socketIP': powerSocketConfig.socketIP,
+                            'socketUsername': powerSocketConfig.socketUsername,
+                            'socketPassword': powerSocketConfig.socketPassword,
+                            'switchName': resultList[(i + nameIndex)],
+                            'switchStatus': resultList[(i + nameIndex + 10)] == '1' ? true : false,
+                            'switchNumber': i
+                        };
+                        toCallAfterRequest(switchS);
+                    }
                 }
             } else {
                 var name = "[" + powerSocketConfig.socketName + "] ";
@@ -241,8 +261,7 @@ AnelPowerControl.prototype.changeSocketSwitch = function(powerSwitchContext, sta
     if (actualstatus != status) {
         var param = status ? '1' : '0';
         var setSocket = function() {
-            var url = 'http://' + powerSwitchContext.socketIP + '/ctrl.htm?Auth:'
-                + powerSwitchContext.socketUsername + powerSwitchContext.socketPassword;
+            var url = 'http://' + powerSwitchContext.socketIP + '/ctrl.htm?Auth:' + powerSwitchContext.socketUsername + powerSwitchContext.socketPassword;
             var sentText = 'F' + powerSwitchContext.switchNumber + '=' + param;
             var xhttp = new XMLHttpRequest();
             var OPEN = url;
