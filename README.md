@@ -7,7 +7,7 @@ This plugin allows you to controll the Anel Power Control Panels via HomeKit. Th
 The AnelPowerControl HomeBridge Plugin is created for the following Anel Products
 - NET-PwrCtrl ADV
 - NET-PwrCtrl HOME
-- NET-PwrCtrl PRO `Thanks to [casprung](https://github.com/casprung "casprung")`
+- NET-PwrCtrl PRO `Thanks to` [casprung](https://github.com/casprung "casprung")
 
 >:+1: If Anel would spend me other Power Control Panels, I could expand it to others ;-)
 
