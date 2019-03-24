@@ -3,6 +3,9 @@
 ## What this plugin does
 This plugin allows you to controll the Anel Power Control Panels via HomeKit. This means you can controll all the Power Sockets just by telling Siri to do so.
 
+## Tested with
+Tested with NetPwrCtrlHome with Firmware 4.5
+
 ### Working Anel Power Control Panels
 The AnelPowerControl HomeBridge Plugin is created for the following Anel Products
 - NET-PwrCtrl ADV
