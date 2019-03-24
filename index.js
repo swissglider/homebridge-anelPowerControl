@@ -183,9 +183,14 @@ AnelPowerControl.prototype.identify = function(context, paired, callback) {
 
 // Method to request the current PowerSocketStatus from the Anel Webserver
 AnelPowerControl.prototype.getCurrentSocketStatus = function(powerSocketConfig, toCallAfterRequest) {
-    var url = 'http://' + powerSocketConfig.socketIP + '/strg.cfg?Auth:' + powerSocketConfig.socketUsername + powerSocketConfig.socketPassword;
+    var url = 'http://' + powerSocketConfig.socketIP + '/strg.cfg';
+    var auth = "Basic " + new Buffer(powerSocketConfig.socketUsername + ":" + powerSocketConfig.socketPassword).toString("base64");
     var name = "[" + powerSocketConfig.socketName + "] ";
-    request.get(url, function(err, res, body) {
+    request.get({ url: url,
+                  headers : {
+                        "Authorization" : auth
+                  }
+                }, function(err, res, body) {
         var name = "[" + powerSocketConfig.socketName + "] ";
         if (err) {
             this.log(name + "Failed to call " + powerSocketConfig.socketIP + " - with Error - " + err);
@@ -209,7 +214,7 @@ AnelPowerControl.prototype.getCurrentSocketStatus = function(powerSocketConfig, 
             } else if (powerSocketConfig.socketTyp == "NetPwrCtrlHome") {
                 var resultList = body.split(';');
                 var nameIndex = 10
-                if (resultList[0] != 'NET-PWRCTRL_04.0') {
+                if (!resultList[0].includes('NET-PWRCTRL_0')) {
                     this.log(name + "Failed to call read the configuration from Socket = " + powerSocketConfig.socketName);
                     this.log(name + "Returned Body = " + body);
                 }
@@ -225,10 +230,12 @@ AnelPowerControl.prototype.getCurrentSocketStatus = function(powerSocketConfig, 
                         'switchNumber': i
                     };
                     toCallAfterRequest(switchS);
-                } else if (powerSocketConfig.socketTyp == "NetPwrCtrlPro") {
+                }
+               
+            } else if (powerSocketConfig.socketTyp == "NetPwrCtrlPro") {
                     var resultList = body.split(';');
                     var nameIndex = 10
-                    if (resultList[0] != 'NET-PWRCTRL_04.0') {
+                    if (!resultList[0].includes('NET-PWRCTRL_0')) {
                         this.log(name + "Failed to call read the configuration from Socket = " + powerSocketConfig.socketName);
                         this.log(name + "Returned Body = " + body);
                     }
@@ -244,8 +251,7 @@ AnelPowerControl.prototype.getCurrentSocketStatus = function(powerSocketConfig, 
                             'switchNumber': i
                         };
                         toCallAfterRequest(switchS);
-                    }
-                }
+                    }  
             } else {
                 var name = "[" + powerSocketConfig.socketName + "] ";
                 this.log(name + "socketListTyp unknown !");
