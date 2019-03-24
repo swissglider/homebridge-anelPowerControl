@@ -267,12 +267,13 @@ AnelPowerControl.prototype.changeSocketSwitch = function(powerSwitchContext, sta
     if (actualstatus != status) {
         var param = status ? '1' : '0';
         var setSocket = function() {
-            var url = 'http://' + powerSwitchContext.socketIP + '/ctrl.htm?Auth:' + powerSwitchContext.socketUsername + powerSwitchContext.socketPassword;
+            var url = 'http://' + powerSwitchContext.socketIP + '/ctrl.htm';
             var sentText = 'F' + powerSwitchContext.switchNumber + '=' + param;
             var xhttp = new XMLHttpRequest();
             var OPEN = url;
             xhttp.open('POST', OPEN, false);
             xhttp.setRequestHeader("Content-type", "text/plain");
+            xhttp.setRequestHeader("Authorization", "Basic " + new Buffer(powerSwitchContext.socketUsername + ":" + powerSwitchContext.socketPassword).toString("base64"));
             xhttp.send(sentText);
             toCallAfterRequest(status, null);
         };
